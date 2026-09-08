@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration - PlaceMate AI</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+    <div class="form-page">
+
+        <div class="form-container">
+
+            <h1>Student Registration</h1>
+
+            <p class="subtitle">
+                Create your placement profile
+            </p>
+
+            <form action="/register" method="POST" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Email Address</label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>College Name</label>
+
+                    <input
+                        type="text"
+                        name="college"
+                        placeholder="Enter your college name"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Branch</label>
+
+                    <input
+                        type="text"
+                        name="branch"
+                        placeholder="Example: Computer Science"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Year</label>
+
+                    <select name="year" required>
+
+                        <option value="">
+                            Select Year
+                        </option>
+
+                        <option value="1st Year">
+                            1st Year
+                        </option>
+
+                        <option value="2nd Year">
+                            2nd Year
+                        </option>
+
+                        <option value="3rd Year">
+                            3rd Year
+                        </option>
+
+                        <option value="4th Year">
+                            4th Year
+                        </option>
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>CGPA</label>
+
+                    <input
+                        type="number"
+                        name="cgpa"
+                        step="0.01"
+                        min="0"
+                        max="10"
+                        placeholder="Enter your CGPA"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Skills</label>
+
+                    <textarea
+                        name="skills"
+                        placeholder="Example: Java, Python, HTML, CSS, SQL"
+                        required></textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Projects</label>
+
+                    <textarea
+                        name="projects"
+                        placeholder="Write each project on a new line"
+                        required></textarea>
+                </div>
+                <div class="form-group">
+
+    <label for="resume">
+        📄 Upload Resume (PDF Only)
+    </label>
+
+    <input
+        type="file"
+        id="resume"
+        name="resume"
+        accept=".pdf"
+    >
+
+    <small>
+        Upload your latest resume in PDF format.
+    </small>
+
+</div>
+<div class="form-group">
+
+    <label>Password</label>
+
+    <input
+        type="password"
+        name="password"
+        placeholder="Create a password"
+        required
+    >
+
+</div>
+
+
+                <button type="submit" class="btn">
+                    Create Profile
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

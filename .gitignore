@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Database
+placemate.db
+
+# User uploaded files
+uploads/
+
+# Environment secrets
+.env

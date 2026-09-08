@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Student Profile | PlaceMate AI</title>
+
+    <!-- Global CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     MAIN DASHBOARD CONTAINER
+========================================= -->
+
+<div class="dashboard-container">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================= -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h1>🚀 PlaceMate AI</h1>
+
+            <p>
+                AI-Powered Placement Readiness Analysis
+            </p>
+
+        </div>
+
+
+        <a
+            href="/"
+            class="home-btn"
+        >
+            ⌂ Home
+        </a>
+
+    </div>
+
+
+
+    <!-- =========================================
+         WELCOME SECTION
+    ========================================= -->
+
+    <div class="welcome-card">
+
+        <h2>
+            Hello, {{ student["name"] }} 👋
+        </h2>
+
+        <p>
+            Here is your personalized placement readiness analysis.
+        </p>
+
+    </div>
+    <!-- =========================================
+     STEP 30 - PLACEMENT ANALYTICS SUMMARY
+========================================= -->
+
+<div class="placement-analytics">
+
+    <div class="analytics-header">
+
+        <h2>📊 Placement Analytics Dashboard</h2>
+
+        <p>
+            Your complete AI-powered placement performance overview
+        </p>
+
+    </div>
+
+
+    <div class="analytics-cards">
+
+
+        <!-- Placement Readiness -->
+
+        <div class="analytics-card">
+
+            <div class="analytics-icon">
+                🎯
+            </div>
+
+            <div>
+
+                <span>Placement Readiness</span>
+
+                <h2>
+                    {{ score }}%
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- Resume Score -->
+
+        <div class="analytics-card">
+
+            <div class="analytics-icon">
+                📄
+            </div>
+
+            <div>
+
+                <span>Resume Score</span>
+
+                <h2>
+                    {{ resume_score }}%
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- Interview Score -->
+
+        <div class="analytics-card">
+
+            <div class="analytics-icon">
+                🎤
+            </div>
+
+            <div>
+
+                <span>Interview Score</span>
+
+                <h2>
+                    {{ average_interview_score }}%
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- Placement Probability -->
+
+        <div class="analytics-card">
+
+            <div class="analytics-icon">
+                🚀
+            </div>
+
+            <div>
+
+                <span>Placement Probability</span>
+
+                <h2>
+                    {{ placement_prediction.probability }}%
+                </h2>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+    <!-- =========================================
+         PLACEMENT SCORE SECTION
+    ========================================= -->
+
+    <div class="score-card">
+
+
+        <!-- LEFT -->
+
+        <div class="score-left">
+
+            <h2>
+                🤖 Placement Readiness Score
+            </h2>
+
+
+            <div class="score-circle">
+
+                <span>
+                    {{ score }}
+                </span>
+
+                <small>
+                    /100
+                </small>
+
+            </div>
+
+
+            <h3>
+                {{ readiness }}
+            </h3>
+
+
+            <p>
+                Your current placement readiness level
+            </p>
+
+        </div>
+
+
+
+        <!-- RIGHT -->
+
+        <div class="score-info">
+
+            <h3>
+                AI Analysis
+            </h3>
+
+
+            {% if score >= 80 %}
+
+                <p class="success">
+
+                    🎉 Excellent! Your profile is highly placement-ready.
+
+                </p>
+
+
+            {% elif score >= 60 %}
+
+                <p class="good">
+
+                    👍 Good profile! A few improvements can make you stronger.
+
+                </p>
+
+
+            {% elif score >= 40 %}
+
+                <p class="average">
+
+                    ⚡ You are developing. Focus more on technical skills.
+
+                </p>
+
+
+            {% else %}
+
+                <p class="danger">
+
+                    📚 Start improving programming fundamentals and projects.
+
+                </p>
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         DASHBOARD GRID
+    ========================================= -->
+
+    <div class="dashboard-grid">
+        <!-- AI PLACEMENT PREDICTION -->
+
+<div class="analysis-card placement-prediction-card">
+
+    <h2>🎯 AI Placement Prediction</h2>
+
+    <div class="prediction-score">
+
+        <span>
+            {{ placement_prediction.probability }}%
+        </span>
+
+        <small>
+            Placement Probability
+        </small>
+
+    </div>
+
+
+    <h3 class="prediction-level">
+        {{ placement_prediction.level }}
+    </h3>
+
+    <p class="prediction-text">
+        {{ placement_prediction.prediction }}
+    </p>
+
+
+    <!-- Strengths -->
+
+    <div class="prediction-section">
+
+        <h3>💪 Your Strengths</h3>
+
+        {% if placement_prediction.strengths %}
+
+            <ul>
+
+                {% for strength in placement_prediction.strengths %}
+
+                    <li class="strength-item">
+                        ✅ {{ strength }}
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+
+        {% else %}
+
+            <p>No major strengths detected yet.</p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Risk Areas -->
+
+    <div class="prediction-section">
+
+        <h3>⚠️ Areas to Improve</h3>
+
+        {% if placement_prediction.risk_areas %}
+
+            <ul>
+
+                {% for risk in placement_prediction.risk_areas %}
+
+                    <li class="risk-item">
+                        ⚠️ {{ risk }}
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+
+        {% else %}
+
+            <p>🎉 No major risk areas detected.</p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Interview Score -->
+
+    <div class="interview-score-info">
+
+        🎤 Average Interview Score:
+
+        <strong>
+            {{ average_interview_score }}/100
+        </strong>
+
+    </div>
+
+</div>
+
+
+
+        <!-- =========================================
+             RESUME IMPROVEMENT SUGGESTIONS
+        ========================================= -->
+
+        <div class="analysis-card">
+
+            <h2>
+                💡 Resume Improvement Tips
+            </h2>
+
+
+            {% if resume_suggestions %}
+
+                <ul class="resume-suggestions">
+
+                    {% for suggestion in resume_suggestions %}
+
+                        <li>
+
+                            💡 {{ suggestion }}
+
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+
+            {% else %}
+
+                <p>
+
+                    🎉 Your resume looks excellent!
+
+                </p>
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             AI RESUME SCORE
+        ========================================= -->
+
+        <div class="analysis-card resume-score-card">
+
+
+            <div class="resume-score-header">
+
+                <h2>
+                    📄 AI Resume Score
+                </h2>
+
+
+                <span class="resume-score">
+
+                    {{ resume_score }}/100
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- PROGRESS BAR -->
+
+            <div class="resume-progress">
+
+                <div
+                    class="resume-progress-bar"
+                    data-score="{{ resume_score }}"
+                ></div>
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            {% if resume_score >= 80 %}
+
+                <p class="resume-status good">
+
+                    🟢 Excellent Resume! Your resume is well structured.
+
+                </p>
+
+
+            {% elif resume_score >= 50 %}
+
+                <p class="resume-status average">
+
+                    🟡 Good Resume, but there is room for improvement.
+
+                </p>
+
+
+            {% else %}
+
+                <p class="resume-status danger">
+
+                    🔴 Your resume needs improvement.
+                    Add more skills, projects and keywords.
+
+                </p>
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             AI IMPROVEMENT SUGGESTIONS
+        ========================================= -->
+
+        <div class="analysis-card">
+
+            <h2>
+                💡 AI Improvement Suggestions
+            </h2>
+
+
+            {% if suggestions %}
+
+                <ul>
+
+                    {% for suggestion in suggestions %}
+
+                        <li>
+
+                            {{ suggestion }}
+
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+
+            {% else %}
+
+                <p>
+
+                    🎉 Your profile looks strong!
+
+                </p>
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             JOB ROLES
+        ========================================= -->
+
+        <div class="analysis-card">
+
+            <h2>
+                🎯 Recommended Job Roles
+            </h2>
+
+
+            <div class="role-container">
+
+
+                {% if job_roles %}
+
+                    {% for role in job_roles %}
+
+                        <span class="role-badge">
+
+                            {{ role }}
+
+                        </span>
+
+                    {% endfor %}
+
+
+                {% else %}
+
+                    <p>
+                        No job roles found.
+                    </p>
+
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             SKILL GAP ANALYSIS
+        ========================================= -->
+
+        <div class="analysis-card">
+
+            <h2>
+                🧠 AI Skill Gap Analysis
+            </h2>
+
+
+            {% if skill_gaps %}
+
+
+                {% for role, gaps in skill_gaps.items() %}
+
+
+                    {% if gaps %}
+
+
+                        <p class="section-text">
+
+                            <strong>
+                                {{ role }}
+                            </strong>
+
+                            skills to improve:
+
+                        </p>
+
+
+                        {% for skill in gaps %}
+
+                            <div class="skill-gap">
+
+                                ❌ {{ skill }}
+
+                            </div>
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <div class="no-gap">
+
+                            🎉 Great! No major skill gaps for
+                            {{ role }}.
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <div class="no-gap">
+
+                    🎉 Great! No major skill gaps detected.
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             STUDENT PROFILE
+        ========================================= -->
+
+        <div class="analysis-card profile-card">
+
+            <h2>
+                🎓 Student Profile
+            </h2>
+
+
+            <div class="profile-row">
+
+                <strong>
+                    Full Name
+                </strong>
+
+                <span>
+                    {{ student["name"] }}
+                </span>
+
+            </div>
+
+
+
+            <div class="profile-row">
+
+                <strong>
+                    Email
+                </strong>
+
+                <span>
+                    {{ student["email"] }}
+                </span>
+
+            </div>
+
+
+
+            <div class="profile-row">
+
+                <strong>
+                    College
+                </strong>
+
+                <span>
+                    {{ student["college"] }}
+                </span>
+
+            </div>
+
+
+
+            <div class="profile-row">
+
+                <strong>
+                    Branch
+                </strong>
+
+                <span>
+                    {{ student["branch"] }}
+                </span>
+
+            </div>
+
+
+
+            <div class="profile-row">
+
+                <strong>
+                    Year
+                </strong>
+
+                <span>
+                    {{ student["year"] }}
+                </span>
+
+            </div>
+
+
+
+            <div class="profile-row">
+
+                <strong>
+                    CGPA
+                </strong>
+
+                <span>
+                    {{ student["cgpa"] }}
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             TECHNICAL SKILLS
+        ========================================= -->
+
+        <div class="analysis-card">
+
+            <h2>
+                💻 Technical Skills
+            </h2>
+
+
+            <div class="skills-display">
+
+
+                {% if student["skills"] %}
+
+
+                    {% for skill in student["skills"].split(",") %}
+
+
+                        {% if skill.strip() %}
+
+                            <span class="skill-tag">
+
+                                {{ skill.strip() }}
+
+                            </span>
+
+                        {% endif %}
+
+
+                    {% endfor %}
+
+
+                {% else %}
+
+
+                    <p>
+                        No skills added yet.
+                    </p>
+
+
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             PROJECTS
+        ========================================= -->
+
+        <div class="analysis-card">
+
+            <h2>
+                📂 Projects
+            </h2>
+
+
+            {% if student["projects"] %}
+
+
+                <div class="projects-text">
+
+                    {{ student["projects"] }}
+
+                </div>
+
+
+            {% else %}
+
+
+                <p>
+                    No projects added yet.
+                </p>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             AI CAREER ROADMAP
+        ========================================= -->
+
+        <div class="analysis-card roadmap-card">
+
+            <h2>
+                🗺️ AI Career Roadmap
+            </h2>
+
+
+            {% if career_roadmap %}
+
+
+                {% for role, steps in career_roadmap.items() %}
+
+
+                    <div class="roadmap-role">
+
+
+                        <h3>
+                            🎯 {{ role }}
+                        </h3>
+
+
+                        <div class="roadmap-steps">
+
+
+                            {% for step in steps %}
+
+
+                                <div class="roadmap-step">
+
+
+                                    <span class="step-number">
+
+                                        {{ loop.index }}
+
+                                    </span>
+
+
+                                    <span class="step-text">
+
+                                        {{ step }}
+
+                                    </span>
+
+
+                                </div>
+
+
+                            {% endfor %}
+
+
+                        </div>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <p>
+
+                    Add more technical skills to generate
+                    your career roadmap.
+
+                </p>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             AI INTERVIEW QUESTIONS
+        ========================================= -->
+
+        <div class="analysis-card interview-card">
+
+            <h2>
+                🎤 AI Interview Questions
+            </h2>
+
+
+            {% if interview_questions %}
+
+
+                {% for item in interview_questions %}
+
+
+                    <div class="interview-question">
+
+
+                        <span class="question-skill">
+
+                            {{ item.skill }}
+
+                        </span>
+
+
+                        <p>
+
+                            {{ item.question }}
+
+                        </p>
+
+
+                        <a
+                            href="{{ url_for(
+                                'interview_answer',
+                                question=item.question
+                            ) }}"
+                            class="answer-btn"
+                        >
+
+                            🤖 View Answer
+
+                        </a>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <p>
+
+                    Add technical skills to generate
+                    interview questions.
+
+                </p>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             30 DAY PLACEMENT PLAN
+        ========================================= -->
+
+        <div class="analysis-card placement-plan-card">
+
+            <h2>
+                📅 AI 30-Day Placement Preparation Plan
+            </h2>
+
+
+            <p class="plan-focus">
+
+                🎯 {{ plan_focus }}
+
+            </p>
+
+
+
+            <div class="plan-grid">
+
+
+                {% for day in placement_plan %}
+
+
+                    <div class="plan-day">
+
+
+                        <input
+                            type="checkbox"
+                            class="day-checkbox"
+                            data-day="{{ loop.index }}"
+                            data-student="{{ student['id'] }}"
+                        >
+
+
+                        <span class="plan-day-number">
+
+                            {{ loop.index }}
+
+                        </span>
+
+
+                        <span class="plan-text">
+
+                            {{ day.replace(
+                                "Day " ~ loop.index ~ ": ",
+                                ""
+                            ) }}
+
+                        </span>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         ACTION BUTTONS
+    ========================================= -->
+
+    <div class="action-buttons">
+
+
+        <a
+            href="/"
+            class="back-btn"
+        >
+
+            ← Back to Home
+
+        </a>
+
+
+
+        <a
+            href="{{ url_for(
+                'mock_interview',
+                student_id=student['id']
+            ) }}"
+            class="interview-btn"
+        >
+
+            🎤 Start AI Mock Interview
+
+        </a>
+
+
+
+        <a
+            href="/register"
+            class="new-profile-btn"
+        >
+
+            + Create New Profile
+
+        </a>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =====================================
+       RESUME PROGRESS BAR
+    ===================================== */
+
+    const progressBar =
+        document.querySelector(".resume-progress-bar");
+
+
+    if (progressBar) {
+
+
+        const score =
+            progressBar.getAttribute("data-score");
+
+
+        setTimeout(function () {
+
+            progressBar.style.width =
+                score + "%";
+
+        }, 200);
+
+
+    }
+
+
+
+    /* =====================================
+       30 DAY PLACEMENT PLAN
+    ===================================== */
+
+    const checkboxes =
+        document.querySelectorAll(".day-checkbox");
+
+
+    checkboxes.forEach(function (checkbox) {
+
+
+        const day =
+            checkbox.getAttribute("data-day");
+
+
+        const studentId =
+            checkbox.getAttribute("data-student");
+
+
+        const storageKey =
+            "placement_" +
+            studentId +
+            "_day_" +
+            day;
+
+
+
+        /* CHECK SAVED STATUS */
+
+        const savedStatus =
+            localStorage.getItem(storageKey);
+
+
+        if (savedStatus === "completed") {
+
+
+            checkbox.checked = true;
+
+
+            checkbox
+                .parentElement
+                .classList
+                .add("completed");
+
+
+        }
+
+
+
+        /* CHECKBOX CHANGE */
+
+        checkbox.addEventListener(
+            "change",
+            function () {
+
+
+                if (checkbox.checked) {
+
+
+                    localStorage.setItem(
+                        storageKey,
+                        "completed"
+                    );
+
+
+                    checkbox
+                        .parentElement
+                        .classList
+                        .add("completed");
+
+
+                } else {
+
+
+                    localStorage.removeItem(
+                        storageKey
+                    );
+
+
+                    checkbox
+                        .parentElement
+                        .classList
+                        .remove("completed");
+
+
+                }
+
+
+            }
+        );
+
+
+    });
+
+
+});
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Mock Interview | PlaceMate AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h1>🎤 AI Mock Interview</h1>
+
+            <p>Practice Interview Questions with PlaceMate AI</p>
+
+        </div>
+
+        <a href="/" class="home-btn">
+            ⌂ Home
+        </a>
+
+    </div>
+
+
+    <!-- WELCOME -->
+
+    <div class="welcome-card">
+
+        <h2>Hello, {{ student["name"] }} 👋</h2>
+
+        <p>
+            Answer the interview questions and test your preparation.
+        </p>
+
+    </div>
+
+
+    <!-- QUESTIONS -->
+
+    {% if interview_questions %}
+
+        {% for item in interview_questions %}
+
+        <div class="analysis-card interview-question-card">
+
+            <span class="question-skill">
+                {{ item.skill }}
+            </span>
+
+            <h3>
+                Question {{ loop.index }}
+            </h3>
+
+            <p class="mock-question">
+
+                {{ item.question }}
+
+            </p>
+
+
+            <!-- ANSWER INPUT -->
+
+          <form
+    action="{{ url_for('submit_answer', student_id=student['id']) }}"
+    method="POST"
+>
+
+    <input
+        type="hidden"
+        name="question"
+        value="{{ item.question }}"
+    >
+
+    <textarea
+    name="student_answer"
+    rows="6"
+    placeholder="Write your answer here..."
+    required
+></textarea>
+
+    <button
+        type="submit"
+        class="submit-answer-btn"
+    >
+        🤖 Submit Answer
+    </button>
+
+</form>
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="analysis-card">
+
+            <p>
+                No interview questions available.
+                Please add technical skills first.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- BACK BUTTON -->
+
+    <div class="action-buttons">
+
+        <button
+            onclick="history.back()"
+            class="back-btn"
+        >
+            ← Back to Profile
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

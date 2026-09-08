@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Interview Performance | PlaceMate AI</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            padding: 40px 20px;
+        }
+
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+
+        /* STATISTICS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+
+        .stat-card h3 {
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 17px;
+        }
+
+
+        .stat-card p {
+            font-size: 30px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+
+        .stat-card small {
+            display: block;
+            margin-top: 10px;
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        /* MAIN CARD */
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .card h2 {
+            color: #333;
+        }
+
+
+        /* INTERVIEW RESULT */
+
+        .result-item {
+            border-left: 5px solid #667eea;
+            background: #f7f8ff;
+            padding: 18px;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+
+
+        .question {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+
+        .score {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+
+        /* EMPTY */
+
+        .empty {
+            text-align: center;
+            color: #777;
+            padding: 30px;
+            line-height: 1.6;
+        }
+
+
+        /* BUTTONS */
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #667eea;
+            color: white;
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+
+        /* CHART */
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+
+        .chart-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+
+        /* TOPIC ANALYSIS */
+
+        .topic-score {
+            color: #667eea;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+
+        .topic-level {
+            margin: 8px 0;
+            font-weight: bold;
+            color: #444;
+        }
+
+
+        .recommendation {
+            margin-top: 12px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px 10px;
+            }
+
+            .header h1 {
+                font-size: 25px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>📊 Interview Performance Dashboard</h1>
+
+        <p>
+            Track your interview progress and improve your skills
+        </p>
+
+    </div>
+
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+
+        <div class="stat-card">
+
+            <h3>Questions Attempted</h3>
+
+            <p>
+                {{ total_attempted }}
+            </p>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <h3>Average Score</h3>
+
+            <p>
+                {{ average_score }}/100
+            </p>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <h3>Highest Score</h3>
+
+            <p>
+                {{ highest_score }}/100
+            </p>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <h3>Performance</h3>
+
+            <p style="font-size:22px;">
+
+                {{ performance }}
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- INTERVIEW HISTORY -->
+
+    <div class="card">
+
+        <h2>
+            📜 Interview History
+        </h2>
+
+
+        {% if results %}
+
+
+            {% for result in results %}
+
+
+                <div class="result-item">
+
+
+                    <div class="question">
+
+                        Q{{ loop.index }}.
+                        {{ result.question }}
+
+                    </div>
+
+
+                    <div class="score">
+
+                        Score:
+                        {{ result.score }}/100
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <div class="empty">
+
+                No interview attempts yet.
+
+                <br><br>
+
+                Start a mock interview to see your performance!
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- PERFORMANCE CHART -->
+
+    <div class="card">
+
+
+        <h2 class="chart-title">
+
+            📈 Interview Performance Progress
+
+        </h2>
+
+
+        {% if results %}
+
+
+            <div class="chart-container">
+
+                <canvas id="performanceChart"></canvas>
+
+            </div>
+
+
+        {% else %}
+
+
+            <div class="empty">
+
+                No performance data available.
+
+                <br><br>
+
+                Complete a mock interview to see your progress chart.
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- AI TOPIC ANALYSIS -->
+
+    <div class="card">
+
+
+        <h2 class="chart-title">
+
+            🧠 AI Topic Analysis
+
+        </h2>
+
+
+        {% if topic_analysis %}
+
+
+            {% for topic in topic_analysis %}
+
+
+                <div class="result-item">
+
+
+                    <div class="question">
+
+                        📚 {{ topic.topic }}
+
+                    </div>
+
+
+                    <div class="topic-score">
+
+                        Average Score:
+                        {{ topic.average }}/100
+
+                    </div>
+
+
+                    <div class="topic-level">
+
+                        Level:
+                        {{ topic.level }}
+
+                    </div>
+
+
+                    <div class="recommendation">
+
+                        💡 {{ topic.recommendation }}
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <div class="empty">
+
+                No topic analysis available yet.
+
+                <br><br>
+
+                Complete more interview questions to analyze
+                your strengths and weaknesses.
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- TOPIC-WISE PERFORMANCE -->
+
+    <div class="card">
+
+
+        <h2 class="chart-title">
+
+            📚 Topic-wise Performance
+
+        </h2>
+
+
+        {% if topic_performance %}
+
+
+            <div class="stats">
+
+
+                {% for topic, data in topic_performance.items() %}
+
+
+                    <div class="stat-card">
+
+
+                        <h3>
+
+                            {{ topic }}
+
+                        </h3>
+
+
+                        <p>
+
+                            {{ data.average }}/100
+
+                        </p>
+
+
+                        <small>
+
+                            Attempts:
+                            {{ data.attempts }}
+
+                        </small>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <div class="empty">
+
+                No topic performance data available yet.
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+   <!-- PERSONALIZED IMPROVEMENT PLAN -->
+
+<div class="card">
+
+    <h2 class="chart-title">
+        🎯 Personalized Improvement Plan
+    </h2>
+
+    {% if improvement_plan %}
+
+        {% for item in improvement_plan %}
+
+        <div class="result-item">
+
+            <div class="question">
+                📚 {{ item.topic }}
+            </div>
+
+            <p>
+                <strong>Current Score:</strong>
+                {{ item.score }}/100
+            </p>
+
+            <br>
+
+            <p>
+                <strong>Priority:</strong>
+
+                {% if item.priority == "High Priority" %}
+                    🔴 {{ item.priority }}
+
+                {% elif item.priority == "Medium Priority" %}
+                    🟡 {{ item.priority }}
+
+                {% else %}
+                    🟢 {{ item.priority }}
+
+                {% endif %}
+            </p>
+
+            <br>
+
+            <!-- FIXED RECOMMENDATION -->
+
+            <p class="recommendation">
+                💡 {{ item.recommendation }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+
+            Complete more interview questions to generate
+            your personalized improvement plan.
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+
+    <!-- STRONGEST AND WEAKEST TOPICS -->
+
+    {% if weakest_topic and strongest_topic %}
+
+
+        <div class="stats">
+
+
+            <!-- WEAKEST -->
+
+            <div class="stat-card">
+
+
+                <h3>
+
+                    🔴 Weakest Topic
+
+                </h3>
+
+
+                <p style="font-size:24px;">
+
+                    {{ weakest_topic }}
+
+                </p>
+
+
+                <small>
+
+                    Score:
+
+                    {{ topic_performance[weakest_topic]["average"] }}/100
+
+                </small>
+
+
+            </div>
+
+
+
+            <!-- STRONGEST -->
+
+            <div class="stat-card">
+
+
+                <h3>
+
+                    🟢 Strongest Topic
+
+                </h3>
+
+
+                <p style="font-size:24px;">
+
+                    {{ strongest_topic }}
+
+                </p>
+
+
+                <small>
+
+                    Score:
+
+                    {{ topic_performance[strongest_topic]["average"] }}/100
+
+                </small>
+
+
+            </div>
+
+
+        </div>
+
+
+    {% endif %}
+
+
+
+    <!-- BUTTONS -->
+
+    <div class="buttons">
+
+
+        <a
+            href="{{ url_for('mock_interview', student_id=student_id) }}"
+            class="btn"
+        >
+
+            🎤 Start Mock Interview
+
+        </a>
+
+
+
+        <a
+            href="{{ url_for('profile', student_id=student_id) }}"
+            class="btn"
+        >
+
+            ← Back to Profile
+
+        </a>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- CHART JAVASCRIPT -->
+
+{% if results %}
+
+<script id="chart-data" type="application/json">
+{
+    "labels": {{ chart_labels | tojson }},
+    "scores": {{ chart_scores | tojson }}
+}
+</script>
+
+<script>
+    const chartData = JSON.parse(
+        document.getElementById("chart-data").textContent
+    );
+
+    const chartLabels = chartData.labels;
+    const chartScores = chartData.scores;
+
+    const ctx = document.getElementById("performanceChart");
+
+    new Chart(ctx, {
+        type: "line",
+
+        data: {
+            labels: chartLabels,
+
+            datasets: [{
+                label: "Interview Score",
+                data: chartScores,
+
+                borderWidth: 3,
+                tension: 0.4,
+                fill: false,
+
+                pointRadius: 6,
+                pointHoverRadius: 8,
+
+                borderColor: "#667eea",
+                backgroundColor: "#667eea"
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    display: true,
+                    position: "top"
+                },
+
+                title: {
+                    display: true,
+                    text: "Your Interview Score Progress"
+                }
+            },
+
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+
+                    ticks: {
+                        stepSize: 10
+                    }
+                },
+
+                x: {
+                    title: {
+                        display: true,
+                        text: "Interview Attempts"
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+{% endif %}
+
+
+</body>
+
+</html>

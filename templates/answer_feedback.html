@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interview Feedback | PlaceMate AI</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .question {
+            font-size: 18px;
+            font-weight: bold;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .score-box {
+            text-align: center;
+        }
+
+        .score {
+            width: 130px;
+            height: 130px;
+            margin: 20px auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        .feedback {
+            background: #f4f6ff;
+            border-left: 5px solid #667eea;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .strength {
+            background: #e9fff0;
+            border-left: 5px solid #28a745;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .improvement {
+            background: #fff4e5;
+            border-left: 5px solid #ff9800;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .answer {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        .user-answer {
+            background: #eef4ff;
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.7;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-profile {
+            background: #667eea;
+        }
+
+        .btn-interview {
+            background: #28a745;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>🤖 AI Interview Feedback</h1>
+            <p>Analyze your answer and improve your interview performance</p>
+        </div>
+
+
+        <!-- QUESTION -->
+
+        <div class="card">
+
+            <h2>📝 Interview Question</h2>
+
+            <div class="question">
+                {{ question }}
+            </div>
+
+        </div>
+
+
+        <!-- SCORE -->
+
+        <div class="card score-box">
+
+            <h2>Your Score</h2>
+
+            <div class="score">
+                {{ result.score }}/100
+            </div>
+
+            <div class="feedback">
+                <strong>AI Feedback:</strong><br>
+                {{ result.feedback }}
+            </div>
+
+        </div>
+
+
+        <!-- STRENGTH -->
+
+        <div class="card">
+
+            <h2>💪 Your Strength</h2>
+
+            <div class="strength">
+                {{ result.strength }}
+            </div>
+
+        </div>
+
+
+        <!-- IMPROVEMENT -->
+
+        <div class="card">
+
+            <h2>📈 Improvement Area</h2>
+
+            <div class="improvement">
+                {{ result.improvement }}
+            </div>
+
+        </div>
+
+
+        <!-- USER ANSWER -->
+
+        <div class="card">
+
+            <h2>✍️ Your Answer</h2>
+
+            <div class="user-answer">
+                {{ user_answer }}
+            </div>
+
+        </div>
+
+
+        <!-- EXPECTED ANSWER -->
+
+        <div class="card">
+
+            <h2>🤖 Recommended Answer</h2>
+
+            <div class="answer">
+                {{ expected_answer }}
+            </div>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <a
+                href="{{ url_for('mock_interview', student_id=student_id) }}"
+                class="btn btn-interview"
+            >
+                🎤 Try Another Interview
+            </a>
+
+
+            <a
+                href="{{ url_for('profile', student_id=student_id) }}"
+                class="btn btn-profile"
+            >
+                ← Back to Profile
+            </a>
+            <a
+    href="{{ url_for('interview_performance', student_id=student_id) }}"
+    class="btn btn-profile"
+>
+    📊 View Performance
+</a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

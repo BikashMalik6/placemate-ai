@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Interview Answer | PlaceMate AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h1>🎤 Interview Practice</h1>
+
+            <p>PlaceMate AI Answer Preparation</p>
+
+        </div>
+
+        <a href="/" class="home-btn">
+            ⌂ Home
+        </a>
+
+    </div>
+
+
+    <!-- QUESTION -->
+
+    <div class="analysis-card interview-answer-card">
+
+        <h2>❓ Interview Question</h2>
+
+        <div class="question-box">
+
+            {{ question }}
+
+        </div>
+
+
+        <!-- ANSWER -->
+
+        <h2>🤖 AI Suggested Answer</h2>
+
+        <div class="answer-box">
+
+            {{ answer }}
+
+        </div>
+
+
+        <!-- BACK BUTTON -->
+
+        <div class="action-buttons">
+
+            <button
+                onclick="history.back()"
+                class="back-btn"
+            >
+                ← Back to Questions
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

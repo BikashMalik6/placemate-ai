@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Interview Result | PlaceMate AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h1>📊 Interview Evaluation</h1>
+
+            <p>AI Mock Interview Result</p>
+
+        </div>
+
+        <a href="/" class="home-btn">
+            ⌂ Home
+        </a>
+
+    </div>
+
+
+    <div class="analysis-card interview-result-card">
+
+        <h2>❓ Question</h2>
+
+        <div class="question-box">
+
+            {{ question }}
+
+        </div>
+
+
+        <h2>✍️ Your Answer</h2>
+
+        <div class="student-answer-box">
+
+            {{ student_answer }}
+
+        </div>
+
+
+        <h2>🤖 AI Evaluation</h2>
+
+
+        <div class="evaluation-score">
+
+            {{ score }}/10
+
+        </div>
+
+
+        <div class="feedback-box">
+
+            <h3>💡 Feedback</h3>
+
+            <p>
+                {{ feedback }}
+            </p>
+
+        </div>
+
+
+        <div class="action-buttons">
+
+            <button
+                onclick="history.back()"
+                class="back-btn"
+            >
+                ← Try Another Question
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

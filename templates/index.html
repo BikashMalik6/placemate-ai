@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PlaceMate AI | Placement Readiness</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="nav-logo">
+            🚀 PlaceMate AI
+        </a>
+
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+
+    <a href="#features">Features</a>
+
+    <a href="#about">About</a>
+
+    
+    <a href="{{ url_for('login') }}">Login</a>
+
+<a href="/register" class="nav-register">
+    Get Started
+</a>
+
+      </div>
+    </div>
+
+</nav>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="rocket">
+            🚀
+        </div>
+
+
+        <h1>
+            PlaceMate AI
+        </h1>
+
+
+        <h2>
+            AI-Powered Placement Readiness Platform
+        </h2>
+
+
+        <p>
+            Analyze your skills, discover skill gaps,
+            practice mock interviews, track your performance,
+            and become placement ready with the power of AI.
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a href="/register" class="btn">
+
+                🚀 Get Started
+
+            </a>
+
+        </div>
+
+
+
+        <!-- FEATURES -->
+
+        <div class="hero-features" id="features">
+
+
+            <div class="feature">
+
+                <span>🧠</span>
+
+                <p>
+                    AI Skill Analysis
+                </p>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <span>🎤</span>
+
+                <p>
+                    Mock Interviews
+                </p>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <span>📊</span>
+
+                <p>
+                    Performance Tracking
+                </p>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <span>💼</span>
+
+                <p>
+                    Career Roadmap
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="how-it-works">
+
+    <div class="section-container">
+
+        <div class="section-heading reveal">
+
+            <span class="section-tag">
+                HOW IT WORKS
+            </span>
+
+            <h2>
+                Your Journey to Placement Success
+            </h2>
+
+            <p>
+                PlaceMate AI helps you understand your skills,
+                improve weaknesses and prepare for your dream job.
+            </p>
+
+        </div>
+
+
+        <div class="steps-container">
+
+
+            <!-- STEP 1 -->
+
+            <div class="work-step">
+
+                <div class="step-icon">
+                    👤
+                </div>
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Create Your Profile
+                </h3>
+
+                <p>
+                    Add your education, technical skills,
+                    projects and career interests.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 2 -->
+
+            <div class="work-step">
+
+                <div class="step-icon">
+                    🧠
+                </div>
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    AI Skill Analysis
+                </h3>
+
+                <p>
+                    Our AI analyzes your skills and identifies
+                    your strengths and skill gaps.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 3 -->
+
+            <div class="work-step">
+
+                <div class="step-icon">
+                    🎯
+                </div>
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Personalized Roadmap
+                </h3>
+
+                <p>
+                    Get a customized learning roadmap
+                    based on your career goals.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 4 -->
+
+            <div class="work-step">
+
+                <div class="step-icon">
+                    🚀
+                </div>
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <h3>
+                    Become Placement Ready
+                </h3>
+
+                <p>
+                    Practice interviews, track performance
+                    and become confident for placements.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about" class="about-section">
+
+    <div class="about-container">
+
+
+       <div class="about-text reveal-left">
+
+            <span class="section-tag">
+                ABOUT PLACEMATE AI
+            </span>
+
+            <h2>
+                Your Personal AI Placement Mentor
+            </h2>
+
+            <p>
+                PlaceMate AI is an intelligent placement readiness
+                platform designed to help students understand their
+                current skills and prepare effectively for placements.
+            </p>
+
+            <p>
+                From AI-powered skill analysis to personalized
+                career roadmaps and mock interview performance,
+                everything is designed to help you grow.
+            </p>
+
+
+            <div class="about-points">
+
+                <div>
+                    ✓ AI-Powered Analysis
+                </div>
+
+                <div>
+                    ✓ Personalized Learning Roadmap
+                </div>
+
+                <div>
+                    ✓ Smart Mock Interviews
+                </div>
+
+                <div>
+                    ✓ Performance Tracking
+                </div>
+
+            </div>
+
+
+            <a href="/register" class="about-btn">
+
+                Start Your Journey →
+
+            </a>
+
+        </div>
+
+
+        <div class="about-visual reveal-right">
+
+            <div class="ai-circle">
+
+                🤖
+
+            </div>
+
+            <h3>
+                AI Powered
+            </h3>
+
+            <p>
+                Your intelligent companion for
+                placement preparation.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+<!-- ================= CONTACT SECTION ================= -->
+
+<section class="contact-section">
+
+    <div class="contact-container">
+
+        <div class="contact-content reveal">
+
+            <span class="section-tag">
+                GET STARTED TODAY
+            </span>
+
+            <h2>
+                Ready to Become Placement Ready?
+            </h2>
+
+            <p>
+                Start your journey with PlaceMate AI and discover
+                your strengths, improve your weaknesses, and prepare
+                confidently for your dream career.
+            </p>
+
+            <a href="/register" class="contact-btn">
+                🚀 Create Your Profile
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+
+        <div class="footer-brand">
+
+            <h2>
+                🚀 PlaceMate AI
+            </h2>
+
+            <p>
+                Your AI-powered companion for smarter
+                placement preparation.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <div class="footer-column">
+
+                <h3>Platform</h3>
+
+                <a href="/">Home</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Get Started</h3>
+
+                <a href="/register">Create Profile</a>
+
+                <a href="/register">
+                    AI Skill Analysis
+                </a>
+
+                <a href="/register">
+                    Mock Interview
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 PlaceMate AI. All Rights Reserved.
+        </p>
+
+        <p>
+            Built with ❤️ for Students
+        </p>
+
+    </div>
+
+</footer>
+
+<script>
+
+    function revealOnScroll() {
+
+        const reveals = document.querySelectorAll(
+            ".reveal, .reveal-left, .reveal-right"
+        );
+
+        reveals.forEach(function(element) {
+
+            const windowHeight = window.innerHeight;
+
+            const elementTop =
+                element.getBoundingClientRect().top;
+
+            const revealPoint = 120;
+
+            if (elementTop < windowHeight - revealPoint) {
+
+                element.classList.add("active");
+
+            }
+
+        });
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        revealOnScroll
+    );
+
+
+    window.addEventListener(
+        "load",
+        revealOnScroll
+    );
+
+
+    /* Animate How It Works Cards */
+
+    const workSteps =
+        document.querySelectorAll(".work-step");
+
+
+    function animateSteps() {
+
+        workSteps.forEach(function(step, index) {
+
+            const stepTop =
+                step.getBoundingClientRect().top;
+
+
+            if (
+                stepTop <
+                window.innerHeight - 100
+            ) {
+
+                setTimeout(function() {
+
+                    step.classList.add("show");
+
+                }, index * 150);
+
+            }
+
+        });
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        animateSteps
+    );
+
+
+    window.addEventListener(
+        "load",
+        animateSteps
+    );
+
+</script>
+</body>
+
+</html>
